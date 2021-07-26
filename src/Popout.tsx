@@ -259,9 +259,7 @@ export default class Popout extends React.Component<PopoutProps> {
 
   private closeChildWindowIfOpened = (): void => {
     if (isChildWindowOpened(this.child!)) {
-      if (this.container instanceof HTMLElement) {
-        ReactDOM.unmountComponentAtNode(this.container);
-      }
+      ReactDOM.unmountComponentAtNode(this.container!);
       this.child!.close();
 
       this.child = null;
