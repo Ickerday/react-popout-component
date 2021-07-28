@@ -195,9 +195,8 @@ export default class Popout extends React.Component<PopoutProps> {
           // There's no good way to detect this, so we capture the exception instead.
         }
       }
-      childHtml += `</head><body><div id="${id}" class="${
-        this.props.className ?? 'react-portal-popout-container'
-      }"></div></body></html>`;
+      childHtml += `</head><body><div id="${id}" class="${this.props.className ?? 'react-portal-popout-container'
+        }"></div></body></html>`;
       child.document.write(childHtml);
       container = child.document.getElementById(id)! as HTMLDivElement;
     }
@@ -259,7 +258,9 @@ export default class Popout extends React.Component<PopoutProps> {
 
   private closeChildWindowIfOpened = (): void => {
     if (isChildWindowOpened(this.child!)) {
-      ReactDOM.unmountComponentAtNode(this.container!);
+      if (!this.props.url) {
+        ReactDOM.unmountComponentAtNode(this.container!);
+      }
       this.child!.close();
 
       this.child = null;
